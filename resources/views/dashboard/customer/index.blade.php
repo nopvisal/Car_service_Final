@@ -28,25 +28,18 @@
                 <table class="table table-hover table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="thead-dark-blue" style="background: color(srgb red green blue);">
                         <tr class="text-center">
+                            <th>No</th>
                             <th>Name</th>
+                            <th>Email</th>
+                            <th>Password</th>
                             <th>Gender</th>
                             <th>Phone</th>
-                            <th>Start date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-light">
                         
-                        <tr>
-                            <td> Long Heang</td> <!-- Use the @ to prevent Blade from parsing this -->
-                            <td class="text-center">Male</td>
-                            <td class="text-center">087 342 094</td>
-                            <td class="text-center">27-01-2025</td>
-                            <td class="text-center">
-                                <button @click="openModal(user)" class="btn btn-warning">Edit</button>
-                                <button @click="deleteUser(index)" class="btn btn-danger">Delete</button>
-                            </td>
-                        </tr>
+                       
                         
                     </tbody>
                 </table>
@@ -54,7 +47,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
     <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
