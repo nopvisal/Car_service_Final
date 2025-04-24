@@ -7,7 +7,7 @@
             </a>
 
         </div>
-        <div class="col-lg-1 col-1  text-end dis">
+        <div class="col-lg-7 col-1  text-end dis">
             <div class="navbar-brand d-flex align-items-center ">
                 <i class="fa fa-list toggle-btn" id="toggleBtn"></i>
                 <div class="sidebar" id="sidebar">
