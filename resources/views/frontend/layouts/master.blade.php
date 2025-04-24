@@ -42,6 +42,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/extrastyle.css') }}" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="{{ asset('frontend/css/stylebooking.css') }}" />
 
@@ -90,6 +91,7 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+    <script src="{{ asset('frontend/js/sidebar.js') }}"></script>
     <script src="{{ asset('frontend/js/navbar.js') }}"></script>
     <script src="{{ asset('frontend/js/jquerybooking.min.js') }}"></script>
 
