@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Dashboard\CustomerController;
 use App\Http\Controllers\Dashboard\productController;
 use App\Http\Controllers\Dashboard\supplierController;
 use App\Http\Controllers\Frontend\HomeFrontendController;
@@ -39,9 +38,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     include __DIR__ . '/admin/user.php';
     include __DIR__ . '/admin/profile.php';
+    include __DIR__ . '/admin/customer.php';
+    
 
     Route::get('dashboard/branch', [BranchController::class, 'branchDashboard']);
-    Route::get('dashboard/customer', [CustomerController::class, 'customerDashboard']);
+    // Route::get('dashboard/customer', [CustomerController::class, 'customerDashboard']);
     Route::get('dashboard/product_type_1', [productController::class, 'productType1']);
     Route::get('dashboard/product_type_2', [productController::class, 'productType2']);
     Route::get('dashboard/product_type_3', [productController::class, 'productType3']);

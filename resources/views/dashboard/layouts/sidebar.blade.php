@@ -30,8 +30,26 @@
 
 
 
-
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('dashboard/customer*') ? 'active' : '' }}">
+        <a class="nav-link {{ request()->is('dashboard/customer*') ? '' : 'collapsed' }}"
+            href="#" data-toggle="collapse" data-target="#collapseSetting"
+            aria-expanded="{{ request()->is('dashboard/customer*') ? 'true' : 'false' }}"
+            aria-controls="collapseSetting">
+            <i class="fa-solid fa-user fs-4 me-2"></i>
+            <span>Customer</span>
+        </a>
+        <div id="collapseSetting"
+            class="collapse {{ request()->is('dashboard/customer*') ? 'show' : '' }}"
+            aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item {{ request()->is('dashboard/customer') ? 'active' : '' }}"
+                    href="{{ url('/dashboard/customer') }}">
+                    Customer
+                </a>
+            </div>
+        </div>
+    </li>
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCustomer"
             aria-expanded="true" aria-controls="collapseCustomer">
             <i class="fa-solid fa-users fs-5"></i>
@@ -42,7 +60,7 @@
                 <a class="collapse-item" href="{{url('/dashboard/customer')}}">List Customer</a>
             </div>
         </div>
-    </li>
+    </li> --}}
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduct"
