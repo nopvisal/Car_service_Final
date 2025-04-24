@@ -30,6 +30,7 @@ class User extends Authenticatable
         'address',
 
     ];
+    protected $table = 'users'; // only if you changed the default table name
 
     /**
      * The attributes that should be hidden for serialization.
