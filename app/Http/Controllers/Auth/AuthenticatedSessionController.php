@@ -24,11 +24,24 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        
+        $credentials = $request->only('email', 'password');
 
-        $request->session()->regenerate();
-
-        return redirect()->intended(route('dashboard', absolute: false));
+        if (Auth::guard('customer')->attempt($credentials, $request->boolean('remember'))) {
+            $request->session()->regenerate();
+            return redirect()->intended('/');
+        }
+    
+        // Try login as user (web guard)
+        if (Auth::guard('web')->attempt($credentials, $request->boolean('remember'))) {
+            $request->session()->regenerate();
+            return redirect()->intended(route('dashboard', absolute: false));
+        }
+    
+        // If both fail, back to login with error
+        return back()->withErrors([
+            'email' => 'Invalid credentials.',
+        ]);
     }
 
     /**
@@ -37,6 +50,8 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
+        Auth::guard('customer')->logout();
+
 
         $request->session()->invalidate();
 

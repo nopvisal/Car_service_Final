@@ -99,6 +99,10 @@
                     </div>
                 </div>
                 <!-- End Booking -->
+                 
+               
+            
+      
                 @auth
 
 
@@ -114,9 +118,10 @@
                     </a>
 
                 @endauth
-
+               
                         </div>
-                    
+               
+                
                 </div>
             </div>
         </div>
