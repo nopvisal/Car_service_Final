@@ -61,7 +61,7 @@ class User extends Authenticatable
     protected static function booted(): void
     {
         static::creating(function (self $user) {
-            $user->role_id ??= Role::where('name', Role::USER)->value('id');
+            $user->role_id ??= Role::where('name', Role::ADMIN)->value('id');
         });
     }
 
