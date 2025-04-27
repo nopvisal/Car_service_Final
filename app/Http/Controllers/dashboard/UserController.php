@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -16,6 +18,9 @@ class UserController extends Controller
         return view('dashboard.user.index');
     }
 
+    
+
+//\\
     public function fetchUserRecord(Request $request)
     {
         $data = DB::table('users')
