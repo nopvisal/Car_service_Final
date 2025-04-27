@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\BranchController;
+use App\Http\Controllers\BookingController;
 
 
 // Route::get('/', function () {
@@ -50,7 +51,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/create_user', [UserController::class, 'createUserDashboard']);
 });
 
+    //Booking 
+    Route::middleware('auth:customer')->group(function () {
+        // Display booking creation form
+        Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
 
+    
+        // Store a new booking
+        Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+    
+        // Show the list of bookings
+        Route::get('/booking/list', [BookingController::class, 'list'])->name('booking.list');
+    
+        // Show the details of a specific booking
+        Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
+    });
+    
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

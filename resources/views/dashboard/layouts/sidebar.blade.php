@@ -46,6 +46,10 @@
                     href="{{ url('/dashboard/customer') }}">
                     Customer
                 </a>
+                <a class="collapse-item {{ request()->is('dashboard/booking') ? 'active' : '' }}"
+                    href="{{ url('/dashboard/booking') }}">
+                    Booking Details
+                </a>
             </div>
         </div>
     </li>

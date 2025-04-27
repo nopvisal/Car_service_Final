@@ -29,7 +29,8 @@ class AuthenticatedSessionController extends Controller
 
         if (Auth::guard('customer')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            $customer = Auth::guard('customer')->user();
+            return redirect()->intended('/')->with('customer_name', $customer->name);
         }
     
         // Try login as user (web guard)
