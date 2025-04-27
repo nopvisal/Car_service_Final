@@ -64,7 +64,7 @@
     @yield('content')
 
 
-    
+
     <!-- Js Plugins -->
     <script src="{{ asset('frontend/js2/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('frontend/js2/bootstrap.min.js') }}"></script>
@@ -76,8 +76,10 @@
     <script src="{{ asset('frontend/js2/mixitup.min.js') }}"></script>
     <script src="{{ asset('frontend/js2/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('frontend/js2/main.js') }}"></script>
-    
+
     <!-- JavaScript Libraries -->
+    <!-- Required Bootstrap JS -->
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('frontend/lib/wow/wow.min.js') }}"></script>
@@ -95,7 +97,7 @@
     <script src="{{ asset('frontend/js/navbar.js') }}"></script>
     <script src="{{ asset('frontend/js/jquerybooking.min.js') }}"></script>
 
-    
+
     <script>
         $('.form-control').each(function () {
             floatedLabel($(this));
@@ -114,6 +116,11 @@
             }
         }
     </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

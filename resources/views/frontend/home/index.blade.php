@@ -304,7 +304,7 @@
                             <div class="bg-blue h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn"
                                 data-wow-delay="0.6s">
                                 <h1 class="text-white mb-4">Book For A Service</h1>
-                                
+
                                <!-- booking form -->
                                <form method="POST" action="{{ route('booking.store') }}">
                                     @csrf
@@ -312,7 +312,7 @@
 
                                     <!-- Customer Phone -->
                                     <div class="col-12 col-sm-6">
-                                    <input type="text" name="phone" placeholder="Your Phone" required class="form-control border-0" style="height: 55px;">
+                                        <input type="text" name="phone" placeholder="Your Phone" required class="form-control border-0" style="height: 55px;">
                                     </div>
                                     <!-- Customer Email -->
                                     <div class="col-12 col-sm-6">
@@ -320,25 +320,25 @@
                                     </div>
                                     <!-- Service Selection -->
                                     <div class="col-12 col-sm-6">
-                                    <select name="service_id" required class="form-select border-0" style="height: 55px;">
-                                        <option selected>Select A Service</option>
-                                        @foreach($services as $service)
-                                            <option value="{{ $service->id }}">{{ $service->name }}</option>
-                                        @endforeach
-                                    </select>
+                                        <select name="service_id" required class="form-select border-0" style="height: 55px;">
+                                            <option selected>Select A Service</option>
+                                            @foreach($services as $service)
+                                                <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <!-- Service Date -->
                                     <div class="col-12 col-sm-6">
-                                    <input type="date" name="service_date" required class="form-control border-0" style="height: 55px;">
+                                        <input type="date" name="service_date" required class="form-control border-0" style="height: 55px;">
                                     </div>
                                     <!-- Special Request -->
                                     <div class="col-12 ">
-                                    <textarea name="special_request" placeholder="Special Request" class="form-control border-0"></textarea>
+                                        <textarea name="special_request" placeholder="Special Request" class="form-control border-0"></textarea>
                                     </div>
                                     <!-- Submit -->
                                     <div class="col-12 ">
-                                    <button type="submit" class="btn btn-secondary w-100 py-3">Book Now</button>
+                                        <button type="submit" class="btn btn-secondary w-100 py-3">Book Now</button>
                                     </div>
                                     </div>
                                 </form>
