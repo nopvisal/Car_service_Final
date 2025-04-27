@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\CustomerController;
 use App\Http\Controllers\Dashboard\productController;
 use App\Http\Controllers\Dashboard\supplierController;
 use App\Http\Controllers\Frontend\HomeFrontendController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\BookingController;
 Route::controller(HomeFrontendController::class)->group(function () {
     Route::get('/', 'homeFrontend');
 });
+
 Route::get('/layout', [HomeFrontendController::class, 'customername']);
 Route::get('/home', [LinkController::class, 'index']);
 Route::get('/contact', [LinkController::class, 'contact']);
@@ -45,8 +47,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('dashboard/branch', [BranchController::class, 'branchDashboard']);
     // Route::get('dashboard/customer', [CustomerController::class, 'customerDashboard']);
-    Route::get('dashboard/product_type_1', [productController::class, 'productType1']);
-    Route::get('dashboard/product_type_2', [productController::class, 'productType2']);
+    Route::get('dashboard/product', [productController::class, 'product']);
+    Route::get('dashboard/stock', [productController::class, 'stock']);
     Route::get('dashboard/product_type_3', [productController::class, 'productType3']);
     Route::get('dashboard/supplier', [supplierController::class, 'supplier']);
     Route::get('/create_user', [UserController::class, 'createUserDashboard']);

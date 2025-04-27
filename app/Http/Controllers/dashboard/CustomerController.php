@@ -14,6 +14,7 @@ class CustomerController extends Controller
     {
         return view('dashboard.customer.index');
     }
+    
 
     public function fetchCustomerRecord(Request $request)
     {
