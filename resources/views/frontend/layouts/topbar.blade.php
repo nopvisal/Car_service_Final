@@ -77,7 +77,7 @@
                                                         @csrf
                                                         <div class="row g-3">
                                                             <div class="col-12 col-sm-6">
-                                                                <input  type="text" name="phone" class="form-control border-0" placeholder="Your Name" style="height: 55px;">
+                                                                <input  type="text" name="phone" class="form-control border-0" placeholder="Your Phone" style="height: 55px;">
                                                             </div>
                                                             <div class="col-12 col-sm-6">
                                                                 <input type="email" name="email" class="form-control border-0" required placeholder="Your Email" style="height: 55px;">
