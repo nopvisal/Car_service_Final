@@ -29,6 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         if (Auth::guard('customer')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
+            
             $customer = Auth::guard('customer')->user();
             return redirect()->intended('/')->with('customer_name', $customer->name);
         }
@@ -50,19 +51,14 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        if (Auth::guard('web')->check()) {
-            Auth::guard('web')->logout();
-        }
-    
-        if (Auth::guard('customer')->check()) {
-            Auth::guard('customer')->logout();
-        }
-    
-        // Invalidate and regenerate the session
+        Auth::guard('customer')->logout();
+        Auth::guard('web')->logout();
+
+        // Invalidate session and regenerate token to prevent session fixation
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-    
-        // Redirect to homepage
+
+        // Redirect to homepage (or any desired page)
         return redirect('/');
     }
 }
