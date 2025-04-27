@@ -6,7 +6,7 @@
     <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{ url('/dashboard/user') }}">Customer</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/dashboard/booking') }}">Booking</a></li>
         </ol>
     </nav>
     <div class="card shadow mb-4">
@@ -25,7 +25,7 @@
                         <span class="icon text-white-50">
                             <i class="fas fa-user-plus"></i>
                         </span>
-                        <span class="text">Create Customer</span>
+                        <span class="text">Create Booking</span>
                 </button>
             </div>
         </div>
@@ -33,7 +33,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4>Customer Management</h4>
+                    <h4>Booking Management</h4>
 
                 </div>
 
@@ -41,11 +41,12 @@
                     <thead class="thead-dark-blue">
                         <tr class="text-center">
                             <th>No</th>
-                            <th>Name</th>
+                            <th>Customer</th>
+                            <th>Service</th>
+                            <th>Phone</th>
                             <th>Email</th>
-                            <th>Password</th>
-                            <th>Language</th>
-                            <th>Status</th>
+                            <th>Service Date</th>
+                            <th>Special Request</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -58,11 +59,11 @@
     </div>
 
     <!-- User Modal -->
-    <div class="modal fade" id="userModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal fade" id="bookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="userModalLabel">[[status == 'add' ? 'Create User' : 'Edit User']]</h5>
+                    <h5 class="modal-title" id="bookingModalLabel">[[status == 'add' ? 'Create Booking' : 'Edit Booking']]</h5>
                     {{-- <button type="button" @click="closeModal()">X</button> --}}
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeModal()">
                         <span aria-hidden="true">&times;</span>
@@ -73,86 +74,87 @@
                         <div class="row">
                             <div class="col-12">
 
-                                <!-- Name -->
+                         
+                  
+
                                 <div class="mb-3">
-                                    <label class="form-label">Name <span class="text-danger">*</span></label>
-                                    <input
-                                        class="form-control"
-                                        :class="{ 'is-invalid': errors.name, 'is-valid': FormData.name && !errors.name }"
-                                        placeholder="Enter Name"
-                                        v-model="FormData.name"
-                                        @blur="validateField('name', FormData.name)"
-                                        required>
-                                    <div class="invalid-feedback" v-if="errors.name">
-                                        [[ errors.name ]]
-                                    </div>
+                                        <label class="form-label">Customer<span class="text-danger">*</span></label>
+                                        <select class="form-control"
+                                            :class="{ 'is-invalid': errors.customer_id, 'is-valid': FormData.customer_id && !errors.customer_id }"
+                                            v-model="FormData.customer_id" @change="validateField('customer_id', FormData.customer_id)">
+                                            <option value="">Select Customer</option> 
+                                            @foreach ($customers as $customers)
+                                            <option value="{{ $customers->id }}">{{ $customers->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="invalid-feedback" v-if="errors.customer_id">
+                                            [[ errors.customer_id ]]
+                                        </div>
                                 </div>
 
                                 <!-- Email -->
                                 <div class="mb-3">
-                                    <label class="form-label">Email <span class="text-danger">*</span></label>
+                                        <label class="form-label">Service<span class="text-danger">*</span></label>
+                                        <select class="form-control"
+                                            :class="{ 'is-invalid': errors.service_id, 'is-valid': FormData.service_id && !errors.service_id }"
+                                            v-model="FormData.service_id" @change="validateField('service_id', FormData.service_id)">
+                                            <option value="">Select Service</option> 
+                                            @foreach ($services as $services)
+                                            <option value="{{ $services->id }}">{{ $services->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="invalid-feedback" v-if="errors.service_id">
+                                            [[ errors.service_id ]]
+                                        </div>
+                                </div>
+                
+                                <div v-if="status == 'add'" class="mb-3">
+                                    <label class="form-label">Phone<span class="text-danger">*</span></label>
                                     <input
-                                        type="email"
+                                        type="number"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': errors.phone, 'is-valid': FormData.phone && !errors.phone }"
+                                        placeholder="Enter phone"
+                                        v-model="FormData.phone"
+                                        @blur="validateField('phone', FormData.phone)"
+                                        required>
+                                    <div class="invalid-feedback" v-if="errors.phone">
+                                        [[ errors.phone ]]
+                                    </div>
+                                </div>
+                                <!-- Language -->
+                                <div class="mb-3">
+                                    <label class="form-label">Email <span class="text-danger">*</span></label>
+                                    <select
                                         class="form-control"
                                         :class="{ 'is-invalid': errors.email, 'is-valid': FormData.email && !errors.email }"
-                                        placeholder="Enter Email"
                                         v-model="FormData.email"
-                                        @blur="validateField('email', FormData.email)"
-                                        :disabled="status === 'edit'"
-                                        required>
+                                        @change="validateField('email', FormData.email)">
+                                        <option :value="null">Select Email</option>
+                                        <option v-for="email in availableEmails" :value="email.id">
+                                            [[ email.name ]]
+                                        </option>
+                                    </select>
                                     <div class="invalid-feedback" v-if="errors.email">
                                         [[ errors.email ]]
                                     </div>
                                 </div>
 
-                                <!-- Password (only shown when adding) -->
-                                <div v-if="status == 'add'" class="mb-3">
-                                    <label class="form-label">Password <span class="text-danger">*</span></label>
-                                    <input
-                                        type="password"
-                                        class="form-control"
-                                        :class="{ 'is-invalid': errors.password, 'is-valid': FormData.password && !errors.password }"
-                                        placeholder="Enter password (min 8 characters)"
-                                        v-model="FormData.password"
-                                        @blur="validateField('password', FormData.password)"
-                                        required>
-                                    <div class="invalid-feedback" v-if="errors.password">
-                                        [[ errors.password ]]
-                                    </div>
-                                </div>
-                                <!-- Language -->
-                                <div class="mb-3">
-                                    <label class="form-label">Language <span class="text-danger">*</span></label>
-                                    <select
-                                        class="form-control"
-                                        :class="{ 'is-invalid': errors.language, 'is-valid': FormData.language && !errors.language }"
-                                        v-model="FormData.language"
-                                        @change="validateField('language', FormData.language)">
-                                        <option :value="null">Select Language</option>
-                                        <option v-for="language in availableLanguages" :value="language.id">
-                                            [[ language.name ]]
-                                        </option>
-                                    </select>
-                                    <div class="invalid-feedback" v-if="errors.language">
-                                        [[ errors.language ]]
-                                    </div>
-                                </div>
-
                                 <!-- Status -->
                                 <div class="mb-3">
-                                    <label class="form-label">Status <span class="text-danger">*</span></label>
+                                    <label class="form-label">Service Date <span class="text-danger">*</span></label>
                                     <select
                                         class="form-control"
-                                        :class="{ 'is-invalid': errors.status, 'is-valid': FormData.status && !errors.status }"
-                                        v-model="FormData.status"
-                                        @change="validateField('status', FormData.status)">
-                                        <option :value="null">Select Status</option>
-                                        <option v-for="status in availableStatuses" :value="status.id">
-                                            [[ status.name ]]
+                                        :class="{ 'is-invalid': errors.service_date, 'is-valid': FormData.service_date && !errors.service_date }"
+                                        v-model="FormData.service_date"
+                                        @change="validateField('service_date', FormData.service_date)">
+                                        <option :value="null">Select Service Date</option>
+                                        <option v-for="service_date in availableServiceDates" :value="service_date.id">
+                                            [[ service_date.name ]]
                                         </option>
                                     </select>
-                                    <div class="invalid-feedback" v-if="errors.status">
-                                        [[ errors.status ]]
+                                    <div class="invalid-feedback" v-if="errors.service_date">
+                                        [[ errors.service_date ]]
                                     </div>
                                 </div>
                             </div>
@@ -185,22 +187,24 @@
         el: '#user_crud',
         delimiters: ['[[', ']]'],
         data: {
-            user_list: [],
+            booking_list: [],
             status: 'add',
             FormData: {
                 id: null,
-                name: null,
+                customer_id: null,
+                service_id: null,
+                phone: null,
                 email: null,
-                password: null,
-                language: null,
-                status: null
+                service_date: null,
+                special_request: null,
             },
             errors: {
-                name: null,
+                customer_id: null,
+                service_id: null,
+                phone: null,
                 email: null,
-                password: null,
-                status: null,
-                language: null,
+                service_date: null,
+                special_request: null,
             },
 
             availableRoles: [],
@@ -215,12 +219,12 @@
         computed: {
             isFormInvalid() {
                 return Object.values(this.errors).some(error => error !== null) ||
-                    !this.FormData.name ||
+                    !this.FormData.customer_id ||
+                    !this.FormData.service_id ||
+                    !this.FormData.phone ||
                     !this.FormData.email ||
-                    (this.status === 'add' && !this.FormData.password) ||
-                    !this.FormData.level ||
-                    this.FormData.status === null ||
-                    !this.FormData.language;
+                    !this.FormData.service_date ||
+                    !this.FormData.special_request;
             }
         },
 
@@ -229,33 +233,13 @@
             this.fetchDropdownData();
         },
         methods: {
-            // fetchDropdownData() {
-            //     // Fetch roles
-            //     axios.get('/dashboard/customer/fetchUserRole')
-            //         .then(response => {
-            //             this.availableRoles = response.data;
-            //         });
-
-            //     // Fetch statuses
-            //     axios.get('/dashboard/user/fetchUserStatus')
-            //         .then(response => {
-            //             this.availableStatuses = response.data;
-            //         });
-
-            //     // Fetch languages
-            //     axios.get('/dashboard/user/fetchUserLanguage')
-            //         .then(response => {
-            //             this.availableLanguages = response.data;
-            //         });
-            // },
-
             initDataTable() {
                 if (this.dataTable) {
                     this.dataTable.destroy();
                 }
 
                 this.dataTable = $('#dataTable').DataTable({
-                    data: this.user_list,
+                    data: this.booking_list,
                     columns: [
                         {
                             data: null,
@@ -263,50 +247,20 @@
                             className: 'text-center'
                         },
 
-                        { data: 'name' },
+                        { data: 'customer_name' },
+
+                        { data: 'service_name' },
+
+                        {
+                            data: 'phone',
+                            className: 'text-center'
+                        },
 
                         { data: 'email' },
 
-                        {
-                            data: 'password',
-                            render: () => '********',
-                            className: 'text-center'
-                        },
+                        { data: 'service_date' },
 
-                        // {
-                        //     data: 'role_name',
-                        //     render: (data, type, row) => {
-                        //         const roleClasses = {
-                        //             'admin': 'bg-danger',
-                        //             'manager': 'bg-primary',
-                        //             'user': 'bg-success'
-                        //         };
-                        //         return `<span class="badge ${roleClasses[data] || 'bg-secondary'}">
-                        //             ${data}
-                        //         </span>`;
-                        //     },
-                        //     className: 'text-center'
-                        // },
-
-                        {
-                            data: 'language',
-                            render: (data) => {
-                                return `<span class="badge ${data === 'kh' ? 'bg-warning' : 'bg-info'}">
-                                    ${data === 'kh' ? 'Khmer' : 'English'}
-                                </span>`;
-                            },
-                            className: 'text-center'
-                        },
-
-                        {
-                            data: 'status',
-                            render: (data) => {
-                                return data === 'active' ?
-                                    '<span class="badge bg-success">Active</span>' :
-                                    '<span class="badge bg-danger">Inactive</span>';
-                            },
-                            className: 'text-center'
-                        },
+                        { data: 'special_request' },
 
                         {
                             data: null,
@@ -340,11 +294,11 @@
                     pageLength: this.pageLength,
                     lengthMenu: [[5, 10, 25, 50, 100], [5, 10, 25, 50, 100]],
                     language: {
-                        emptyTable: "No users found",
-                        info: "Showing _START_ to _END_ of _TOTAL_ users",
-                        infoEmpty: "Showing 0 to 0 of 0 users",
+                        emptyTable: "No booking found",
+                        info: "Showing _START_ to _END_ of _TOTAL_ booking",
+                        infoEmpty: "Showing 0 to 0 of 0 booking",
                         search: "_INPUT_",
-                        searchPlaceholder: "Search users..."
+                        searchPlaceholder: "Search booking..."
                     },
                     createdRow: function(row, data) {
                         if (data.role_name === 'admin') {
@@ -361,17 +315,17 @@
 
                 // Edit button
                 $('#dataTable').on('click', '.edit-btn', function() {
-                    const userId = $(this).data('id');
-                    const user = vm.user_list.find(u => u.id == userId);
-                    if (user) {
-                        vm.openModal(user);
+                    const bookingId = $(this).data('id');
+                    const bookings = vm.booking_list.find(u => u.id == bookingId);
+                    if (bookings) {
+                        vm.openModal(bookings);
                     }
                 });
 
                 // Delete button
                 $('#dataTable').on('click', '.delete-btn', function() {
-                    const userId = $(this).data('id');
-                    vm.confirmDelete(userId);
+                    const bookingId = $(this).data('id');
+                    vm.confirmDelete(bookingId);
                 });
             },
 
@@ -379,9 +333,9 @@
                 let vm = this;
                 $.LoadingOverlay("show");
 
-                axios.get('/dashboard/customer/fetchDataRecord')
+                axios.get('/dashboard/booking/fetchDataRecord')
                     .then(function (response) {
-                        vm.user_list = response.data;
+                        vm.booking_list = response.data;
 
                         vm.initDataTable();
 
@@ -391,21 +345,20 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'Failed to fetch users: ' + error.message,
+                            text: 'Failed to fetch booking: ' + error.message,
                         });
                     })
             },
 
             createRecord() {
                 if (!this.validateForm()) return;
-                axios.post('/dashboard/customer/createCustomerRecord', this.FormData)
-
+                axios.post('/dashboard/booking/createBookingRecord', this.FormData)
                     .then(() => {
                         Swal.fire({
                             position: "top-end",
                             icon: 'success',
                             title: 'Success',
-                            text: 'User created successfully!✅',
+                            text: 'Booking created successfully!✅',
                             showConfirmButton: false,
                             timer: 1500
                         });
@@ -415,7 +368,7 @@
                     })
 
                     .catch(error => {
-                        let errorMessage = error.response?.data?.message || 'Error creating user';
+                        let errorMessage = error.response?.data?.message || 'Error creating booking';
                         if (error.response?.data?.errors) {
                             errorMessage = Object.values(error.response.data.errors).join('<br>');
                         }
@@ -441,13 +394,13 @@
                 }
 
                 const swalInstance = Swal.fire({
-                    title: 'Updating User...',
+                    title: 'Updating Booking...',
                     allowOutsideClick: false,
                     didOpen: () => Swal.showLoading()
                 });
 
 
-                axios.post('/dashboard/customer/updateCustomerRecord', this.FormData)
+                axios.post('/dashboard/booking/updateBookingRecord', this.FormData)
                     .then(response => {
                         swalInstance.close();
 
@@ -462,10 +415,10 @@
                             });
 
                             // Update the specific user in user_list
-                            const updatedUser = response.data.data;
-                            const index = this.user_list.findIndex(u => u.id === updatedUser.id);
+                            const updatedBooking = response.data.data;
+                            const index = this.booking_list.findIndex(u => u.id === updatedBooking.id);
                             if (index !== -1) {
-                                this.$set(this.user_list, index, updatedUser);
+                                this.$set(this.booking_list, index, updatedBooking);
                             }
 
                             this.closeModal();
@@ -526,7 +479,7 @@
         preConfirm: () => {
             $.LoadingOverlay("show");
             this.isProcessing = true;
-            return axios.delete(`/dashboard/customer/deleteCustomerRecord/${userId}`)
+            return axios.delete(`/dashboard/booking/deleteBookingRecord/${userId}`)
                 .then(response => {
                     if (!response.data.success) {
                         throw new Error(response.data.message);
@@ -566,7 +519,7 @@
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: error.response?.data?.message || 'Failed to delete user',
+            text: error.response?.data?.message || 'Failed to delete booking',
             timer: 1500
         });
     });
@@ -612,11 +565,11 @@
                     };
                 }
 
-                $('#userModal').modal('show');
+                $('#bookingModal').modal('show');
             },
 
             closeModal() {
-                $('#userModal').modal('hide');
+                $('#bookingModal').modal('hide');
                 this.resetForm();
             },
 
