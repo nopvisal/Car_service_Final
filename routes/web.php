@@ -40,7 +40,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     include __DIR__ . '/admin/user.php';
     include __DIR__ . '/admin/profile.php';
     include __DIR__ . '/admin/customer.php';
-    
+    include __DIR__ . '/admin/booking.php';
+
 
     Route::get('dashboard/branch', [BranchController::class, 'branchDashboard']);
     // Route::get('dashboard/customer', [CustomerController::class, 'customerDashboard']);
@@ -51,22 +52,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/create_user', [UserController::class, 'createUserDashboard']);
 });
 
-    //Booking 
+    //Booking
     Route::middleware('auth:customer')->group(function () {
         // Display booking creation form
         Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
 
-    
+
         // Store a new booking
         Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
-    
+
         // Show the list of bookings
         Route::get('/booking/list', [BookingController::class, 'list'])->name('booking.list');
-    
+
         // Show the details of a specific booking
         Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
     });
-    
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
