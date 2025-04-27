@@ -75,9 +75,8 @@
         <div id="collapseProduct" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="/product_type_1">Product Type 1</a>
-                <a class="collapse-item" href="/product_type_2">Product Type 2</a>
-                <a class="collapse-item" href="/product_type_3">Product Type 3</a>
+                <a class="collapse-item" href="/dashboard/product">Product</a>
+                <a class="collapse-item" href="/dashboard/stock">Stock</a>
             </div>
         </div>
     </li>

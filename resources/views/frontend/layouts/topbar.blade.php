@@ -58,7 +58,7 @@
 
             <div class="h-100 d-inline-flex align-items-center">
                 <!-- Booking -->
-                <button class="buttons" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <button class="buttons" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="border:none;">
                     Booking
                 </button>
 
@@ -76,34 +76,37 @@
                                                     <form method="POST" action="{{ route('booking.store') }}">
                                                         @csrf
                                                         <div class="row g-3">
-                                                            <div class="col-12 col-sm-6">
-                                                                <input  type="text" name="phone" class="form-control border-0" placeholder="Your Name" style="height: 55px;">
-                                                            </div>
-                                                            <div class="col-12 col-sm-6">
-                                                                <input type="email" name="email" class="form-control border-0" required placeholder="Your Email" style="height: 55px;">
-                                                            </div>
-                                                            <div class="col-12 col-sm-6">
-                                                                <select name="service_id" class="form-select border-0" style="height: 55px;">
-                                                                    <option selected>Select A Service</option>
-                                                                    @foreach($services as $service)
-                                                                        <option value="{{ $service->id }}">{{ $service->name }}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                            <!-- Service Date -->
-                                                            <div class="col-12 col-sm-6">
-                                                                <div class="date" id="date1" data-target-input="nearest">
-                                                                    <input type="date" name="service_date" class="form-control border-0 datetimepicker-input" placeholder="Service Date" data-target="#date1" data-toggle="datetimepicker" style="height: 55px;">
-                                                                </div>
-                                                            </div>
-                                                            <!-- Special Request -->
-                                                            <div class="col-12 ">
-                                                                <textarea name="special_request" placeholder="Special Request" class="form-control border-0"></textarea>
-                                                            </div>
-                                                            <!-- Submit -->
-                                                            <div class="col-12">
-                                                                <button class="btn btn-secondary w-100 py-3" type="submit">Book Now</button>
-                                                            </div>
+
+                                                        <!-- Customer Phone -->
+                                                        <div class="col-12 col-sm-6">
+                                                            <input type="text" name="phone" placeholder="Your Phone" required class="form-control border-0" style="height: 55px;">
+                                                        </div>
+                                                        <!-- Customer Email -->
+                                                        <div class="col-12 col-sm-6">
+                                                        <input type="email" name="email" placeholder="Your Email" required class="form-control border-0" style="height: 55px;">
+                                                        </div>
+                                                        <!-- Service Selection -->
+                                                        <div class="col-12 col-sm-6">
+                                                            <select name="service_id" required class="form-select border-0" style="height: 55px;">
+                                                                <option selected>Select A Service</option>
+                                                                @foreach($services as $service)
+                                                                    <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <!-- Service Date -->
+                                                        <div class="col-12 col-sm-6">
+                                                            <input type="date" name="service_date" required class="form-control border-0" style="height: 55px;">
+                                                        </div>
+                                                        <!-- Special Request -->
+                                                        <div class="col-12 ">
+                                                            <textarea name="special_request" placeholder="Special Request" class="form-control border-0"></textarea>
+                                                        </div>
+                                                        <!-- Submit -->
+                                                        <div class="col-12 ">
+                                                            <button type="submit" class="btn btn-secondary w-100 py-3">Book Now</button>
+                                                        </div>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -116,17 +119,21 @@
                         </div>
                     </div>
                 </div>
+
+                
                 @auth('customer')
-                        <li>Welcome, {{ Auth::guard('customer')->user()->name }}</li>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="p-1 px-4 btn-primary rounded-lg">Logout</button>
-                        </form>
-                    @else
-                        <a href="/login">
-                            <div class="buttons">Login</div>
-                        </a>
-                    @endauth
+                    <li>Welcome, {{ Auth::guard('customer')->user()->name }}</li>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="p-1 px-4 btn-primary rounded-lg">Logout</button>
+                    </form>
+                @else
+                    <a href="/login" class="buttons">
+                        Login
+                    </a>
+                @endauth
+
 
             </div>
 

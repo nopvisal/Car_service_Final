@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 
 class productController extends Controller
 {
-    public function productType1(Request $request)
+    public function product(Request $request)
     {
-        return view('dashboard.product.product_type_1');
+        return view('dashboard.product.product');
     }
 
-    public function productType2(Request $request)
+    public function stock(Request $request)
     {
-        return view('dashboard.product.product_type_2');
+        return view('dashboard.product.stock');
     }
 
     public function productType3(Request $request)
