@@ -8,3 +8,5 @@ Route::get('/dashboard/customer/fetchDataRecord', [CustomerController::class, 'f
 Route::post('/dashboard/customer/createCustomerRecord', [CustomerController::class, 'createCustomerRecord'])->name('createCustomerRecord');
 Route::delete('/dashboard/customer/deleteCustomerRecord/{id}', [CustomerController::class, 'deleteCustomerRecord'])->name('deleteCustomerRecord');
 Route::post('/dashboard/customer/updateCustomerRecord', [CustomerController::class, 'updateCustomerRecord'])->name('updateCustomerRecord');
+
+

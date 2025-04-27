@@ -7,6 +7,7 @@ use App\Models\Booking;
 use App\Models\Customer;
 use App\Models\Service;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class BookingController extends Controller
 {
@@ -25,18 +26,15 @@ class BookingController extends Controller
     return response()->json($data);
     }
 
-
-
     public function createBookingRecord(Request $request){
         $validator = Validator::make($request->all(), [
-            'customer_id'     => 'required|string|max:191',
-            'service_id'      => 'required|string|max:191',
-            'phone'           => 'required|numeric|digits_between:8,191',
-            'email'           => 'required|email|unique:customers,email|max:191', // fixed typo in 'unique'
+            'customer_id'     => 'required|integer',
+            'service_id'      => 'required|integer',
+            'phone'           => ['required', 'regex:/^0[1-9][0-9]{7,8}$/'], // Cambodian phone format
+            'email'           => 'required|email|unique:customers,email|max:191',
             'service_date'    => 'required|date',
-            'special_request' => 'required|string',
+            'special_request' => 'required|string|max:1000', // optional max length
         ]);
-        
 
         // If validation fails, return error response
         if ($validator->fails()) {
@@ -75,15 +73,13 @@ class BookingController extends Controller
     public function updateBookingRecord(Request $request){
         // Validate the request data
         $validator = Validator::make($request->all(), [
-            'customer_id'     => 'required|string|max:191',
-            'service_id'      => 'required|string|max:191',
-            'phone'           => 'required|numeric|digits_between:8,191',
-            'email'           => 'required|email|unique:customers,email|max:191', // fixed typo in 'unique'
+            'customer_id'     => 'required|integer',
+            'service_id'      => 'required|integer',
+            'phone'           => ['required', 'regex:/^0[1-9][0-9]{7,8}$/'], // Cambodian phone format
+            'email'           => 'required|email|unique:customers,email|max:191',
             'service_date'    => 'required|date',
-            'special_request' => 'required|string',
+            'special_request' => 'required|string|max:1000', // optional max length
         ]);
-        
-
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
