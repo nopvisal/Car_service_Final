@@ -4,41 +4,88 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Service;
+use Illuminate\Support\Facades\Auth;
 
 class LinkController extends Controller
 {
     public function aboutus(Request $request){
-        return view('frontend.aboutus.index');
+        $services = Service::all(); 
+
+        // Get the currently logged-in customer (using 'customer' guard)
+        $customer = Auth::guard('customer')->user(); 
+    
+        return view('frontend.aboutus.index', compact('services', 'customer'));
     }
     public function booking(Request $request){
-        return view('frontend.booking.index');
+        $services = Service::all(); 
+
+        // Get the currently logged-in customer (using 'customer' guard)
+        $customer = Auth::guard('customer')->user(); 
+        return view('frontend.booking.index', compact('services', 'customer'));
     }
     public function service(Request $request){
-        return view('frontend.service.index');
+        $services = Service::all(); 
+
+        // Get the currently logged-in customer (using 'customer' guard)
+        $customer = Auth::guard('customer')->user(); 
+        return view('frontend.service.index', compact('services', 'customer'));
     }
     public function P404(Request $request){
-        return view('frontend.404.index');
+        $services = Service::all(); 
+
+        // Get the currently logged-in customer (using 'customer' guard)
+        $customer = Auth::guard('customer')->user(); 
+        return view('frontend.404.index', compact('services', 'customer'));
     }
     public function contact(Request $request){
-        return view('frontend.contact.index');
+        $services = Service::all(); 
+
+        // Get the currently logged-in customer (using 'customer' guard)
+        $customer = Auth::guard('customer')->user(); 
+        return view('frontend.contact.index', compact('services', 'customer'));
     }
     public function team(Request $request){
-        return view('frontend.team.index');
+        $services = Service::all(); 
+
+        // Get the currently logged-in customer (using 'customer' guard)
+        $customer = Auth::guard('customer')->user(); 
+        return view('frontend.team.index', compact('services', 'customer'));
     }
     public function index(Request $request){
-        return view('frontend.home.index');
+        $services = Service::all(); 
+
+        // Get the currently logged-in customer (using 'customer' guard)
+        $customer = Auth::guard('customer')->user(); 
+        return view('frontend.home.index', compact('services', 'customer'));
     }
     public function testimonial(Request $request){
-        return view('frontend.testimonial.index');
+        $services = Service::all(); 
+
+        // Get the currently logged-in customer (using 'customer' guard)
+        $customer = Auth::guard('customer')->user(); 
+        return view('frontend.testimonial.index', compact('services', 'customer'));
     }
     public function login(Request $request){
-        return view('login');
+        $services = Service::all(); 
+
+        // Get the currently logged-in customer (using 'customer' guard)
+        $customer = Auth::guard('customer')->user(); 
+        return view('login', compact('services', 'customer'));
     }
     public function signup(Request $request){
-        return view('signup');
+        $services = Service::all(); 
+
+        // Get the currently logged-in customer (using 'customer' guard)
+        $customer = Auth::guard('customer')->user(); 
+        return view('signup', compact('services', 'customer'));
     }
     public function shop(Request $request){
-        return view('frontend.shop.index');
+        $services = Service::all(); 
+
+        // Get the currently logged-in customer (using 'customer' guard)
+        $customer = Auth::guard('customer')->user(); 
+        return view('frontend.shop.index', compact('services', 'customer'));
     }
 
 }

@@ -116,19 +116,17 @@
                         </div>
                     </div>
                 </div>
-                @auth
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="p-1 px-4 btn-primary rounded-lg">Logout</button>
-                    </form>
-
-                @else
-                    <a href="/login">
-                        <div class="buttons">Login</div>
-                    </a>
-
-                @endauth
+                @auth('customer')
+                        <li>Welcome, {{ Auth::guard('customer')->user()->name }}</li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="p-1 px-4 btn-primary rounded-lg">Logout</button>
+                        </form>
+                    @else
+                        <a href="/login">
+                            <div class="buttons">Login</div>
+                        </a>
+                    @endauth
 
             </div>
 

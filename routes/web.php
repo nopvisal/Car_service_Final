@@ -20,7 +20,7 @@ use App\Http\Controllers\BookingController;
 Route::controller(HomeFrontendController::class)->group(function () {
     Route::get('/', 'homeFrontend');
 });
-
+Route::get('/layout', [HomeFrontendController::class, 'customername']);
 Route::get('/home', [LinkController::class, 'index']);
 Route::get('/contact', [LinkController::class, 'contact']);
 Route::get('/aboutus', [LinkController::class, 'aboutus']);
