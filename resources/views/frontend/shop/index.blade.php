@@ -93,6 +93,34 @@
                 <div class="row">
 
 
+                   
+                    @foreach ($products as $product)
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="product__item">
+                            <!-- Use background-image inline style and check for image existence -->
+                            <div class="product__item__pic" 
+                                style="background-image: url('{{ $product->photo ? asset('storage/' . $product->photo) : asset('frontend/img/default-image.jpg') }}');">
+                                <ul class="product__hover">
+                                    <li><a href="#"><img src="{{ asset('frontend/img/icon/heart.png') }}" alt=""></a></li>
+                                    <li><a href="#"><img src="{{ asset('frontend/img/icon/compare.png') }}" alt=""><span>Compare</span></a></li>
+                                    <li><a href="#"><img src="{{ asset('frontend/img/icon/search.png') }}" alt=""></a></li>
+                                </ul>
+                            </div>
+                            <div class="product__item__text">
+                                <h6>{{ $product->name }}</h6>
+                                <h6>{{ $product->price }}$</h6>
+                                <a href="#" class="add-cart">+ Add To Cart</a>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item sale">
                             <div class="product__item__pic set-bg" data-setbg="{{ asset('frontend/img/product/total-oil.png') }}">
@@ -106,6 +134,7 @@
                             </div>
                             <div class="product__item__text">
                                 <h6>Total MC3 Motor Oil 5L</h6>
+                                <h6>15.00$</h6>
                                 <a href="#" class="add-cart">+ Add To Cart</a>
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
@@ -130,41 +159,6 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="{{ asset('frontend/img/product/car_battery.png') }}">
-                                <ul class="product__hover">
-                                    <li><a href="#"><img src="{{ asset('frontend/img/icon/heart.png') }}" alt=""></a></li>
-                                    <li><a href="#"><img src="{{ asset('frontend/img/icon/compare.png') }}" alt=""> <span>Compare</span></a>
-                                    </li>
-                                    <li><a href="#"><img src="{{ asset('frontend/img/icon/search.png') }}" alt=""></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6>Car Battery</h6>
-                                <a href="#" class="add-cart">+ Add To Cart</a>
-                                <div class="rating">
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </div>
-                                <h5></h5>
-                                <div class="product__color__select">
-                                    <label for="pc-10">
-                                        <input type="radio" id="pc-10">
-                                    </label>
-                                    <label class="active black" for="pc-11">
-                                        <input type="radio" id="pc-11">
-                                    </label>
-                                    <label class="grey" for="pc-12">
-                                        <input type="radio" id="pc-12">
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item sale">
                             <div class="product__item__pic set-bg" data-setbg="{{ asset('frontend/img/product/tire.png') }}" style="background-position:top;">
                                 <span class="label">Sale</span>
@@ -177,6 +171,7 @@
                             </div>
                             <div class="product__item__text">
                                 <h6>Car Tire</h6>
+                                <h6>50.00$</h6>
                                 <a href="#" class="add-cart">+ Add To Cart</a>
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
@@ -212,6 +207,7 @@
                             </div>
                             <div class="product__item__text">
                                 <h6>Spark Plug</h6>
+                                <h6>30.00$</h6>
                                 <a href="#" class="add-cart">+ Add To Cart</a>
                                 <div class="rating">
                                     <i class="fa fa-star-o"></i>
@@ -247,6 +243,7 @@
                             </div>
                             <div class="product__item__text">
                                 <h6>Car Suspension</h6>
+                                <h6>10.00$</h6>
                                 <a href="#" class="add-cart">+ Add To Cart</a>
                                 <div class="rating">
                                     <i class="fa fa-star-o"></i>
@@ -282,6 +279,7 @@
                             </div>
                             <div class="product__item__text">
                                 <h6>Oil Filter</h6>
+                                <h6>19.00$</h6>
                                 <a href="#" class="add-cart">+ Add To Cart</a>
                                 <div class="rating">
                                     <i class="fa fa-star-o"></i>
@@ -303,6 +301,8 @@
                                     </label>
                                 </div>
                             </div>
+
+                           
                         </div>
                     </div>
                 </div>

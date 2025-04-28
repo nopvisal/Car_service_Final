@@ -122,12 +122,13 @@
 
                 
                 @auth('customer')
-                    <li>Welcome, {{ Auth::guard('customer')->user()->name }}</li>
-
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="p-1 px-4 btn-primary rounded-lg">Logout</button>
                     </form>
+                    <h4 style="position:absolute;top:60px;right:20px;color:white;">Welcome, {{ Auth::guard('customer')->user()->name }}</h4>
+
+                  
                 @else
                     <a href="/login" class="buttons">
                         Login

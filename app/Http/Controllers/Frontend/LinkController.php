@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
 
 class LinkController extends Controller
 {
@@ -82,10 +83,11 @@ class LinkController extends Controller
     }
     public function shop(Request $request){
         $services = Service::all(); 
+        $products = Product::all();
 
         // Get the currently logged-in customer (using 'customer' guard)
         $customer = Auth::guard('customer')->user(); 
-        return view('frontend.shop.index', compact('services', 'customer'));
+        return view('frontend.shop.index', compact('services', 'customer','products'));
     }
 
 }

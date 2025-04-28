@@ -33,15 +33,7 @@ Route::prefix('dashboard/product')->group(function () {
 //end-------
 
  // Routes for managing stock----
-Route::prefix('dashboard')->middleware('auth')->group(function () {
-   
-    Route::get('products/{product}/stock', [StockController::class, 'index'])->name('stock.index');
-    Route::get('products/{product}/stock/create', [StockController::class, 'create'])->name('stock.create');
-    Route::post('products/{product}/stock', [StockController::class, 'store'])->name('stock.store');
-    Route::get('products/{product}/stock/{stock}/edit', [StockController::class, 'edit'])->name('stock.edit');
-    Route::put('products/{product}/stock/{stock}', [StockController::class, 'update'])->name('stock.update');
-    Route::delete('products/{product}/stock', [StockController::class, 'destroy'])->name('stock.destroy');
-});
+
  // Routes end----
 
 
