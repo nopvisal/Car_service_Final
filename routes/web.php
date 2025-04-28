@@ -12,7 +12,7 @@ use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\BranchController;
 use App\Http\Controllers\BookingController;
-
+use App\Http\Controllers\StockController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -21,6 +21,29 @@ use App\Http\Controllers\BookingController;
 Route::controller(HomeFrontendController::class)->group(function () {
     Route::get('/', 'homeFrontend');
 });
+//product-------
+Route::prefix('dashboard/product')->group(function () {
+    Route::get('/', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/store', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');  // This is where you define destroy
+});
+//end-------
+
+ // Routes for managing stock----
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+   
+    Route::get('products/{product}/stock', [StockController::class, 'index'])->name('stock.index');
+    Route::get('products/{product}/stock/create', [StockController::class, 'create'])->name('stock.create');
+    Route::post('products/{product}/stock', [StockController::class, 'store'])->name('stock.store');
+    Route::get('products/{product}/stock/{stock}/edit', [StockController::class, 'edit'])->name('stock.edit');
+    Route::put('products/{product}/stock/{stock}', [StockController::class, 'update'])->name('stock.update');
+    Route::delete('products/{product}/stock', [StockController::class, 'destroy'])->name('stock.destroy');
+});
+ // Routes end----
+
 
 Route::get('/layout', [HomeFrontendController::class, 'customername']);
 Route::get('/home', [LinkController::class, 'index']);
@@ -47,7 +70,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('dashboard/branch', [BranchController::class, 'branchDashboard']);
     // Route::get('dashboard/customer', [CustomerController::class, 'customerDashboard']);
-    Route::get('dashboard/product', [productController::class, 'product']);
+    
     Route::get('dashboard/stock', [productController::class, 'stock']);
     Route::get('dashboard/product_type_3', [productController::class, 'productType3']);
     Route::get('dashboard/supplier', [supplierController::class, 'supplier']);
