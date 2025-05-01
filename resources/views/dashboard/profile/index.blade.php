@@ -15,10 +15,10 @@
                     <div class="card">
                         <div class="d-flex flex-column align-items-center mt-4">
                             <div class="rounded-circle overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="w-100 h-100" src="{{ asset('frontend/img/p5.jpg') }}" alt="profile picture">
+                                <img class="w-100 h-100" src="{{ asset('frontend/img/img-01.png') }}" alt="profile picture">
                             </div>
                             <div class="mt-3 text-center">
-                                <h5>Khem Hengngoun</h5>
+                                <h5>Admin</h5>
                                 <p class="text-secondary mb-1">Full Stack Developer</p>
                                 <p class="text-muted font-size-sm">Phnom Penh</p>
                                
