@@ -64,7 +64,7 @@
 
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
-                        <div class="modal-content">
+                        <div class="modal-content" >
                             <div class="modal-body">
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 <div id="booking" class="section">
@@ -74,41 +74,41 @@
                                                 <div class="bg-blue h-100 d-flex flex-column justify-content-center text-center p-5 ">
                                                     <h1 class="text-white mb-4">Book For A Service</h1>
                                                     <form method="POST" action="{{ route('booking.store') }}">
-                                                        @csrf
-                                                        <div class="row g-3">
+                                    @csrf
+                                    <div class="row g-3">
 
-                                                        <!-- Customer Phone -->
-                                                        <div class="col-12 col-sm-6">
-                                                            <input type="text" name="phone" placeholder="Your Phone" required class="form-control border-0" style="height: 55px;">
-                                                        </div>
-                                                        <!-- Customer Email -->
-                                                        <div class="col-12 col-sm-6">
-                                                        <input type="email" name="email" placeholder="Your Email" required class="form-control border-0" style="height: 55px;">
-                                                        </div>
-                                                        <!-- Service Selection -->
-                                                        <div class="col-12 col-sm-6">
-                                                            <select name="service_id" required class="form-select border-0" style="height: 55px;">
-                                                                <option selected>Select A Service</option>
-                                                                @foreach($services as $service)
-                                                                    <option value="{{ $service->id }}">{{ $service->name }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
+                                    <!-- Customer Phone -->
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" name="phone" placeholder="Your Phone" required class="form-control border-0" style="height: 55px;">
+                                    </div>
+                                    <!-- Customer Email -->
+                                    <div class="col-12 col-sm-6">
+                                    <input type="email" name="email" placeholder="Your Email" required class="form-control border-0" style="height: 55px;">
+                                    </div>
+                                    <!-- Service Selection -->
+                                    <div class="col-12 col-sm-6">
+                                        <select name="service_id" required class="form-select border-0" style="height: 55px;">
+                                            <option selected>Select A Service</option>
+                                            @foreach($services as $service)
+                                                <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
-                                                        <!-- Service Date -->
-                                                        <div class="col-12 col-sm-6">
-                                                            <input type="date" name="service_date" required class="form-control border-0" style="height: 55px;">
-                                                        </div>
-                                                        <!-- Special Request -->
-                                                        <div class="col-12 ">
-                                                            <textarea name="special_request" placeholder="Special Request" class="form-control border-0"></textarea>
-                                                        </div>
-                                                        <!-- Submit -->
-                                                        <div class="col-12 ">
-                                                            <button type="submit" class="btn btn-secondary w-100 py-3">Book Now</button>
-                                                        </div>
-                                                        </div>
-                                                    </form>
+                                    <!-- Service Date -->
+                                    <div class="col-12 col-sm-6">
+                                        <input type="date" name="service_date" required class="form-control border-0" style="height: 55px;">
+                                    </div>
+                                    <!-- Special Request -->
+                                    <div class="col-12 ">
+                                        <textarea name="special_request" placeholder="Special Request" class="form-control border-0"></textarea>
+                                    </div>
+                                    <!-- Submit -->
+                                    <div class="col-12 ">
+                                        <button type="submit" class="btn btn-secondary w-100 py-3">Book Now</button>
+                                    </div>
+                                    </div>
+                                </form>
                                                 </div>
                                             </div>
 

@@ -10,11 +10,37 @@ use Illuminate\Support\Facades\Storage;
 
 class productController extends Controller
 {
+     public function completePurchase(Request $request)
+    {
+        // Get the items from the request
+        $items = $request->input('items');
+        
+        foreach ($items as $item) {
+            $product = Product::where('name', $item['name'])->first();
+            
+            if ($product) {
+                // Deduct stock/quantity from the product
+                $product->quantity -= $item['quantity'];
+                
+                if ($product->quantity < 0) {
+                    return response()->json(['success' => false, 'message' => 'Not enough stock for ' . $item['name']]);
+                }
+
+                // Save the updated product
+                $product->save();
+            } else {
+                return response()->json(['success' => false, 'message' => 'Product ' . $item['name'] . ' not found']);
+            }
+        }
+
+        return response()->json(['success' => true, 'message' => 'Purchase completed successfully']);
+    }
    public function index()
     {
         $products = Product::with('stock')->get();
         return view('dashboard.product.index', compact('products'));
     }
+   
 
     // Show form to create a new product
     public function create()

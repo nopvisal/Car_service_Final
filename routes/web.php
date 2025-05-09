@@ -13,6 +13,7 @@ use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\BranchController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\PurchaseController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -29,11 +30,12 @@ Route::prefix('dashboard/product')->group(function () {
     Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');  // This is where you define destroy
+    Route::post('/complete-purchase', [ProductController::class, 'completePurchase']);
 });
 //end-------
 
  // Routes for managing stock----
-
+   
  // Routes end----
 
 

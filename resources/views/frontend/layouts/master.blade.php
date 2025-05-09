@@ -45,7 +45,7 @@
     <link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/extrastyle.css') }}" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="{{ asset('frontend/css/stylebooking.css') }}" />
-
+     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 
